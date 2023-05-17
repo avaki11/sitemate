@@ -28,7 +28,7 @@ const getIssue = (issues, id) => {
         }
 };
 
-// Gets all issues within the Object Issues.
+// Gets id issues within the Object Issues.
 app.get('/issues/:id', (response, request) => {
     const id = request.params.id;
     if (!CheckIssue(issues, id)) {
@@ -38,12 +38,14 @@ app.get('/issues/:id', (response, request) => {
     response.json(getIssue(issues, id));
 });
 
+// Gets all issues within the Object Issues.
 app.get('/issues/', (response, request) => {
     const id = request.params.id;
     const IssuesList = Object.keys(issues).map(id => getIssue(issues, id));
     response.json(getIssue(issues, IssuesList));
 });
 
+// Creates an issue within the Object Issues .
 app.post('/issues/', (response, request) => {
     const {id, title, description} = request.body;
 
@@ -58,6 +60,7 @@ app.post('/issues/', (response, request) => {
         response.status(200).send(`Issue with id ${id} created`);
 });
 
+// Updates an issue within the Object Issues.
 app.put('/issues/', (response, request) => {
     const {id, title: newIssueTitle, description: newIssueDescription} = request.body;
 
@@ -73,7 +76,7 @@ app.put('/issues/', (response, request) => {
 
 });
 
-
+// Deletes an issue within the Object Issues.
 app.delete('/issues/:id', (response, request) => {
     const id = request.params.id;
 
